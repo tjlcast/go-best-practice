@@ -1,7 +1,10 @@
 package downloader
 
 import (
-	"http"
+	"net/http"
+	"io"
+	"encoding/json"
+	Logger "get-bili/fmt" 
 )
 
 type InfoRequest struct {
@@ -26,13 +29,14 @@ func BatchDownloadVideoInfo(request InfoRequest) (InfoResponse, error) {
 
 	for _, bvid := range request.Bvids {
 		var videoInfo VideoInfo
-
-		resp, err := http.Get("https://api.bilibili.com/x/web-interface/view?bvid=" + bvid)
+		url := "https://api.bilibili.com/x/web-interface/view?bvid=" + bvid
+		Logger.Info("Get --> ", url)
+		resp, err := http.Get(url)
 		if err != nil {
 			return InfoResponse{}, err
 		}
 
-		respBytes, err := io.ReadAll(getResp.Body)
+		respBytes, err := io.ReadAll(resp.Body)
 		if err != nil {
 			return InfoResponse{}, err
 		}

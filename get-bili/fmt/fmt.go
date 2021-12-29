@@ -21,3 +21,7 @@ func init() {
 func Println(args ...interface{}) {
 	Logger.Println(args...)
 }
+
+func Info(args ...interface{}) {
+	Logger.Println(args...)
+}
