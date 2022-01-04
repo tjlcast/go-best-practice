@@ -29,4 +29,9 @@ func main() {
 	subSlice := newSlice[0:2]
 	bs, _ := json.Marshal(subSlice)
 	fmt.Println(string(bs))
+
+	testArr := [...]string{}
+	bs, _ = json.Marshal(testArr)
+	fmt.Println(string(bs))
+	fmt.Println("Len: ", len(testArr))
 }
